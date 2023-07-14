@@ -1,0 +1,51 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/deliveries":
+    post:
+      summary: Creates a delivery
+      tags:
+      - Deliviries
+      parameters: []
+      responses:
+        '201':
+          description: delivery created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                delivered_at:
+                  type: string
+                description:
+                  type: string
+                trip_id:
+                  type: string
+              required:
+              - address
+              - delivered_at
+              - description
+              - trip_id
+  "/api/v1/routes/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show route with the trips and their withdrawals and deliviries
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://localhost:3000
